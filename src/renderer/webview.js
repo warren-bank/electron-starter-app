@@ -8,6 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const body = document.body
   body.style.paddingTop = '44px'
+  body.style.position   = 'relative'
 
   div.appendChild(h2)
   body.appendChild(div)
