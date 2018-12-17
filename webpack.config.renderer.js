@@ -1,6 +1,8 @@
 const path    = require('path')
 const nod_mod = path.resolve('./node_modules') + path.sep
-const webpack = require(nod_mod + 'webpack')
+
+const webpack      = require(nod_mod + 'webpack')
+const TerserPlugin = require(nod_mod + 'terser-webpack-plugin')
 
 module.exports = {
   entry: {
@@ -46,17 +48,34 @@ module.exports = {
       }
     ]
   },
+  mode: 'production',
   plugins: [
     new webpack.DefinePlugin({
       "process.env": {
         NODE_ENV: JSON.stringify('production')
       }
     }),
-    new webpack.optimize.UglifyJsPlugin({
+    new TerserPlugin({
       sourceMap: true,
-      warnings: false,
-      mangle: true,
-      cache: false
+      cache:     false,
+      parallel:  true,
+      terserOptions: {
+        ecma:            5,
+        warnings:        false,
+        parse:           {},
+        compress:        {},
+        mangle:          true,
+        module:          false,
+        output:          {
+          comments:        /@license/i
+        },
+        toplevel:        false,
+        nameCache:       null,
+        ie8:             false,
+        keep_classnames: undefined,
+        keep_fnames:     false,
+        safari10:        false
+      }
     })
   ],
   node: {
