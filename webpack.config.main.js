@@ -22,7 +22,7 @@ module.exports = {
     rules: [
       {
         test: /\.(?:js|jsx)$/i,
-        exclude: /\/node_modules\/(?!@warren-bank\/)/,
+        exclude: /(?:node_modules)/,
         loader: nod_mod + 'babel-loader',
         query: {
           presets: [nod_mod + 'babel-preset-' + 'env', nod_mod + 'babel-preset-' + 'stage-0']
