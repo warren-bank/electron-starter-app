@@ -1,0 +1,18 @@
+{
+  "name": "@warren-bank/electron-starter-app",
+  "productName": "Electron-Starter-App",
+  "desktopName": "electron-starter-app.desktop",
+  "private": true,
+  "version": "0.1.0",
+  "main": "bundles/main.js",
+  "description": "Electron starter app",
+  "author": "Warren Bank (https://github.com/warren-bank)",
+  "license": "GPL-2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/warren-bank/electron-starter-app"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}

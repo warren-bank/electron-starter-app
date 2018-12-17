@@ -1,0 +1,40 @@
+{
+  "appId": "com.github.warren-bank.electron-starter-app",
+  "artifactName": "builds/${productName}-${version}-${os}-${arch}.${ext}",
+  "directories": {
+    "app": "app",
+    "buildResources": "resources",
+    "output": "output"
+  },
+  "files": [
+    "*",
+    "**/*"
+  ],
+  "linux": {
+    "category": "Development",
+    "target": [
+      "tar.gz",
+      "appimage"
+    ]
+  },
+  "mac": {
+    "category": "public.app-category.developer-tools",
+    "target": [
+      "zip",
+      "dmg"
+    ]
+  },
+  "dmg": {
+    "iconSize": 140,
+    "iconTextSize": 18
+  },
+  "win": {
+    "target": [
+      "zip",
+      "portable"
+    ]
+  },
+  "portable": {
+    "artifactName": "builds/${productName}-${version}-${arch}-portable.${ext}"
+  }
+}

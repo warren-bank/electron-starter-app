@@ -1,0 +1,6 @@
+node_modules/
+src/node_modules/
+
+output/
+app/bundles/*.js
+app/bundles/*.map

@@ -1,0 +1,16 @@
+#content > .component {
+  padding: 1em;
+}
+
+#content > .component.app {
+}
+#content > .component.app > select + h3 {
+  margin-top: 1em;
+}
+#content > .component.app > webview {
+  margin-top: 1em;
+}
+#content > .component.app > webview,
+#content > .component.app > webview > iframe {
+  height: 800px;
+}
