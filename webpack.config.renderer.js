@@ -60,7 +60,7 @@ module.exports = {
       cache:     false,
       parallel:  true,
       terserOptions: {
-        ecma:            5,
+        ecma:            undefined,  // https://github.com/terser-js/terser/blob/0f18e803e44ad5036bccb8f8948388b5ddb71681/lib/parse.js#L869
         warnings:        false,
         parse:           {},
         compress:        {},
