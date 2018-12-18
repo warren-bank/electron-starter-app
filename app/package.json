@@ -3,7 +3,7 @@
   "productName": "Electron-Starter-App",
   "desktopName": "electron-starter-app.desktop",
   "private": true,
-  "version": "0.1.0",
+  "version": "1.0.0",
   "main": "bundles/main.js",
   "description": "Electron starter app",
   "author": "Warren Bank (https://github.com/warren-bank)",
