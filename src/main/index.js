@@ -24,8 +24,26 @@ app.on('ready', () => {
   trayIcon = new Tray(icon)
   trayIcon.setToolTip(app.getName())
 
+  trayIcon.on('click', () => {
+    if (!mainWindow) {
+      trayIcon.destroy()
+      app.quit()
+    }
+
+    const isMinimized = mainWindow.isMinimized()
+    const isVisible   = mainWindow.isVisible()
+
+    if (isMinimized)
+      mainWindow.restore()
+    else if (!isVisible)
+      mainWindow.show()
+
+    mainWindow.focus()
+  })
+
   mainWindow = new BrowserWindow({icon})
   mainWindow.loadURL(URL)
+
   mainWindow.on('closed', () => {
     mainWindow = null
   })
