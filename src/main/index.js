@@ -1,5 +1,5 @@
-const {app, Menu, ipcMain, BrowserWindow, dialog} = require('electron')
-const {makePortable, setPortablePaths}            = require('@warren-bank/electron-portable-paths')
+const {app, Tray, Menu, ipcMain, BrowserWindow, dialog} = require('electron')
+const {makePortable, setPortablePaths}                  = require('@warren-bank/electron-portable-paths')
 
 const utils        = require('common/utils')
 const downloadFile = require('libs/downloadFile')
@@ -16,11 +16,15 @@ const show_dialog = (message, is_error) => {
 makePortable(app)
 setPortablePaths(app)
 
-let mainWindow
+let trayIcon, mainWindow
 app.on('ready', () => {
-  const URL = utils.convert_relative_filepath_to_URL(app, 'index.html')
+  const icon = utils.resolve_relative_filepath(app, 'assets', 'icons', (process.platform === 'win32') ? 'icon.ico' : 'icon.png')
+  const URL  = utils.convert_relative_filepath_to_URL(app, 'index.html')
 
-  mainWindow = new BrowserWindow()
+  trayIcon = new Tray(icon)
+  trayIcon.setToolTip(app.getName())
+
+  mainWindow = new BrowserWindow({icon})
   mainWindow.loadURL(URL)
   mainWindow.on('closed', () => {
     mainWindow = null
@@ -32,6 +36,13 @@ app.on('ready', () => {
 
 app.on('window-all-closed', () => {
   app.quit()
+})
+
+app.on('before-quit', () => {
+  // Make sure tray icon gets removed if the user exits via CTRL-Q
+  if (trayIcon && process.platform === 'win32') {
+    trayIcon.destroy()
+  }
 })
 
 ipcMain.on('download-file', (event, URL) => {
