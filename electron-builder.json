@@ -1,6 +1,16 @@
 {
   "appId": "com.github.warren-bank.electron-starter-app",
   "artifactName": "builds/${productName}-${version}-${os}-${arch}.${ext}",
+  "extraMetadata": {
+    "name":        "electron-starter-app",
+    "productName": "Electron-Starter-App",
+    "desktopName": "electron-starter-app.desktop",
+    "main":        "bundles/main.js",
+    "author": {
+      "name":  "Warren Bank (https://github.com/warren-bank)",
+      "email": "warren-bank@users.noreply.github.com"
+    }
+  },
   "directories": {
     "app": "app",
     "buildResources": "resources",
@@ -12,10 +22,21 @@
   ],
   "linux": {
     "category": "Development",
+    "executableName": "electron-starter-app",
     "target": [
       "tar.gz",
-      "appimage"
+      "appimage",
+      "deb",
+      "rpm"
     ]
+  },
+  "deb": {
+    "afterInstall": "resources/scripts/linux-package.after-install.sh",
+    "afterRemove": "resources/scripts/linux-package.after-remove.sh"
+  },
+  "rpm": {
+    "afterInstall": "resources/scripts/linux-package.after-install.sh",
+    "afterRemove": "resources/scripts/linux-package.after-remove.sh"
   },
   "mac": {
     "category": "public.app-category.developer-tools",

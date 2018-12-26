@@ -22,7 +22,7 @@
     "build:mac": "electron-builder build --mac                --publish=never",
     "build:all": "npm run build:win && npm run build:lin && npm run build:mac",
 
-    "clean:out": "rm -rf ./output && rm -f ./app/bundles/*.js ./app/bundles/*.map",
+    "clean:out": "rm -f ./app/bundles/*.js ./app/bundles/*.map && rm -rf ./output && mkdir -p ./output/builds",
     "clean:npm": "rm -rf ./node_modules && rm -rf ./src/node_modules",
     "clean:all": "npm run clean:out && npm run clean:npm",
 
@@ -34,6 +34,7 @@
     "electron-builder": "*",
 
     "webpack": "*",
+    "webpack-cli": "*",
     "terser-webpack-plugin": "*",
 
     "babel-core": "~6.26.0",

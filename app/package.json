@@ -1,10 +1,8 @@
 {
   "name": "@warren-bank/electron-starter-app",
-  "productName": "Electron-Starter-App",
-  "desktopName": "electron-starter-app.desktop",
   "private": true,
   "version": "1.0.0",
-  "main": "bundles/main.js",
+  "main": "",
   "description": "Electron starter app",
   "author": "Warren Bank (https://github.com/warren-bank)",
   "license": "GPL-2.0",
