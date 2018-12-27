@@ -13,11 +13,19 @@ cd 'my-electron-app'
 
 npm install
 
+npm run dev
+# ---------------------- 'dev' is an alias for the following:
+# npm run 'clean:out'
+# npm run 'bundle:main' # statically bundles scripts in 'main' process
+# npm run 'dev:server'  # starts `webpack-dev-server` to dynamically bundle scripts in 'renderer' process
+# npm run 'dev:start'   # starts `electron`: static 'main' process, dynamic 'renderer' process w/ hot reload
+# ----------------------
+
 npm start
 # ---------------------- 'start' is an alias for the following:
 # npm run 'clean:out'
 # npm run 'bundle:all'
-# npm run 'build:all'
+# npm run 'build:all'   # starts `electron-builder` to generate executables for all targets
 # ----------------------
 ```
 
