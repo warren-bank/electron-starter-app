@@ -27,11 +27,14 @@
     "clean:all":  "npm run clean:out && npm run clean:npm",
 
     "dev:init":   "npm run clean:out && npm run bundle:main",
-    "dev:start":  "cross-env dev_server_url='http://localhost:3000'    ELECTRON_DISABLE_SECURITY_WARNINGS='1'    electron ./app",
     "dev:server": "cross-env dev_server_url='http://localhost:3000'    webpack-dev-server --config webpack.config.renderer.dev-server.js",
+    "dev:start":  "cross-env dev_server_url='http://localhost:3000'    ELECTRON_DISABLE_SECURITY_WARNINGS='1'    electron ./app",
+
+    "dev:spawn:server":   "npm run dev:init && npm run dev:server",
+    "dev:spawn:electron": "node-sleep 10000 && npm run dev:start",
 
     "start": "npm run clean:out && npm run bundle:all && npm run build:all",
-    "dev":   "npm run dev:init  && npm run dev:start   & npm run dev:server",
+    "dev":   "concurrently --kill-others npm:dev:spawn:*",
     "test":  "echo \"Error: no test specified\" && exit 1"
   },
   "devDependencies": {
@@ -55,6 +58,8 @@
     "autoprefixer": "~7.2.2",
 
     "shx": "*",
-    "cross-env": "*"
+    "cross-env": "*",
+    "concurrently": "*",
+    "@warren-bank/node-sleep": "*"
   }
 }
