@@ -19,7 +19,9 @@ setPortablePaths(app)
 let trayIcon, mainWindow
 app.on('ready', () => {
   const icon = utils.resolve_relative_filepath(app, 'assets', 'icons', (process.platform === 'win32') ? 'icon.ico' : 'icon.png')
-  const URL  = utils.convert_relative_filepath_to_URL(app, 'index.html')
+  const URL  = process.env.dev_server_url
+                 ? process.env.dev_server_url
+                 : utils.convert_relative_filepath_to_URL(app, 'index.html')
 
   trayIcon = new Tray(icon)
   trayIcon.setToolTip(app.getName())
