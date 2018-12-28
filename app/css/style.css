@@ -8,9 +8,10 @@
   margin-top: 1em;
 }
 #content > .component.app > webview {
-  margin-top: 1em;
 }
 #content > .component.app > webview,
 #content > .component.app > webview > iframe {
+  margin-top: 1em;
+  width: 100%;
   height: 800px;
 }

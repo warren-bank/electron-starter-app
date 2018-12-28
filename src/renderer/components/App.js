@@ -1,8 +1,10 @@
-const React        = require('react')
-const {remote}     = require('electron')
+const React         = require('react')
 
-const utils        = require('common/utils')
-const downloadFile = require('libs/downloadFile')
+const {remote}      = require('libs/electron')
+const utils         = require('libs/utils')
+const downloadFile  = require('libs/downloadFile')
+const is_electron   = require('libs/is_electron_renderer')
+const is_web        = !is_electron
 
 const preloadJS = utils.convert_relative_filepath_to_URL(remote.app, 'bundles/webview.js')
 
@@ -57,7 +59,16 @@ class App extends React.Component {
             <webview
               preload={preloadJS}
               src={this.state.URL_webview}
-            />
+            >
+              {
+                is_web &&
+                  <iframe
+                    src={this.state.URL_webview}
+                    frameborder='0'
+                    sandbox=''
+                  />
+              }
+            </webview>
         }
       </div>
     )

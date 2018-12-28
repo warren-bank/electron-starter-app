@@ -4,6 +4,8 @@ const nod_mod = path.resolve('./node_modules') + path.sep
 const webpack      = require(nod_mod + 'webpack')
 const TerserPlugin = require(nod_mod + 'terser-webpack-plugin')
 
+const target = (process.env.webpack_target === 'web') ? 'web' : 'electron-renderer'
+
 module.exports = {
   entry: {
     index:   './src/renderer/index.js',
@@ -19,7 +21,8 @@ module.exports = {
     modules: [
       nod_mod.substring(0, nod_mod.length-1),
       path.resolve('./src/node_modules'),
-      path.resolve('./src/renderer'),
+      path.resolve('./src/renderer/context/common'),
+      path.resolve('./src/renderer/context/' + target),
       path.resolve('./src')
     ]
   },
@@ -77,8 +80,8 @@ module.exports = {
     })
   ],
   node: {
-    __filename: true,
-    __dirname: true,
+    __filename: (target === 'electron-renderer'),
+    __dirname:  (target === 'electron-renderer')
   },
-  target: 'electron-renderer'
+  target: target
 }

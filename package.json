@@ -11,31 +11,38 @@
     "url": "https://github.com/warren-bank/electron-starter-app"
   },
   "scripts": {
-    "postinstall": "cd ./src && npm install",
+    "postinstall":            "cd ./src && npm install",
 
-    "bundle:main":     "webpack --config webpack.config.main.js",
-    "bundle:renderer": "webpack --config webpack.config.renderer.js",
-    "bundle:all":      "npm run bundle:main && npm run bundle:renderer",
+    "bundle:main":            "webpack --config webpack.config.main.js",
+    "bundle:renderer":        "webpack --config webpack.config.renderer.js",
+    "bundle:all":             "npm run bundle:main && npm run bundle:renderer",
 
-    "build:win":  "electron-builder build --win   --x64 --ia32 --publish=never",
-    "build:lin":  "electron-builder build --linux --x64 --ia32 --publish=never",
-    "build:mac":  "electron-builder build --mac                --publish=never",
-    "build:all":  "npm run build:win && npm run build:lin && npm run build:mac",
+    "build:win":              "electron-builder build --win   --x64 --ia32 --publish=never",
+    "build:lin":              "electron-builder build --linux --x64 --ia32 --publish=never",
+    "build:mac":              "electron-builder build --mac                --publish=never",
+    "build:all":              "npm run build:win && npm run build:lin && npm run build:mac",
 
-    "clean:out":  "shx rm -f ./app/bundles/*.js ./app/bundles/*.map && shx rm -rf ./output && shx mkdir -p ./output/builds",
-    "clean:npm":  "shx rm -rf ./node_modules && shx rm -rf ./src/node_modules",
-    "clean:all":  "npm run clean:out && npm run clean:npm",
+    "clean:out":              "shx rm -f ./app/bundles/*.js ./app/bundles/*.map && shx rm -rf ./output && shx mkdir -p ./output/builds",
+    "clean:npm":              "shx rm -rf ./node_modules && shx rm -rf ./src/node_modules",
+    "clean:all":              "npm run clean:out && npm run clean:npm",
 
-    "dev:init":   "npm run clean:out && npm run bundle:main",
-    "dev:server": "cross-env dev_server_url='http://localhost:3000'    webpack-dev-server --config webpack.config.renderer.dev-server.js",
-    "dev:start":  "cross-env dev_server_url='http://localhost:3000'    ELECTRON_DISABLE_SECURITY_WARNINGS='1'    electron ./app",
+    "dev:init":               "npm run clean:out && npm run bundle:main",
+    "dev:server":             "cross-env dev_server_url='http://localhost:3000'    webpack-dev-server --config webpack.config.renderer.dev-server.js",
+    "dev:start":              "cross-env dev_server_url='http://localhost:3000'    ELECTRON_DISABLE_SECURITY_WARNINGS='1'    electron ./app",
 
-    "dev:spawn:server":   "npm run dev:init && npm run dev:server",
-    "dev:spawn:electron": "node-sleep 10000 && npm run dev:start",
+    "dev:spawn:server":       "npm run dev:init && npm run dev:server",
+    "dev:spawn:electron":     "node-sleep 10000 && npm run dev:start",
 
-    "start": "npm run clean:out && npm run bundle:all && npm run build:all",
-    "dev":   "concurrently --kill-others npm:dev:spawn:*",
-    "test":  "echo \"Error: no test specified\" && exit 1"
+    "start":                  "npm run clean:out && npm run bundle:all && npm run build:all",
+    "dev":                    "concurrently --kill-others npm:dev:spawn:*",
+
+    "web:bundle:renderer":    "cross-env webpack_target='web'    npm run bundle:renderer",
+    "web:dev:server":         "cross-env webpack_target='web'    npm run dev:server",
+
+    "web:start":              "npm run clean:out && npm run web:bundle:renderer",
+    "web:dev":                "npm run clean:out && npm run web:dev:server",
+
+    "test":                   "echo \"Error: no test specified\" && exit 1"
   },
   "devDependencies": {
     "electron": "*",
