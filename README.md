@@ -12,7 +12,11 @@ mv 'electron-starter-app-master' 'my-electron-app'
 cd 'my-electron-app'
 
 npm install
+```
 
+#### Usage - electron app:
+
+```bash
 npm run dev
 # ---------------------- 'dev' is an alias for the following:
 # npm run 'clean:out'
@@ -26,6 +30,24 @@ npm start
 # npm run 'clean:out'
 # npm run 'bundle:all'
 # npm run 'build:all'   # starts `electron-builder` to generate executables for all targets
+# ----------------------
+```
+
+#### Usage - browser build of renderer SPA:
+
+```bash
+npm run web:dev
+# ---------------------- 'web:dev' is an alias for the following:
+# npm run 'clean:out'
+# npm run 'web:dev:server'
+# chromium 'http://localhost:3000'
+# ----------------------
+
+npm run web:start
+# ---------------------- 'web:start' is an alias for the following:
+# npm run 'clean:out'
+# npm run 'web:bundle:renderer'
+# chromium "file://$(pwd)/app/index.html"
 # ----------------------
 ```
 
