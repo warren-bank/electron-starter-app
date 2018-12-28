@@ -65,7 +65,8 @@ class App extends React.Component {
                   <iframe
                     src={this.state.URL_webview}
                     frameborder='0'
-                    sandbox=''
+                    sandbox='allow-same-origin'
+                    referrerpolicy='origin'
                   />
               }
             </webview>
