@@ -1,50 +1,30 @@
-// throws
-const url_status = (URL) => {
-  try {
-    const http = new XMLHttpRequest()
-    http.open('HEAD', URL, false)
-    http.send()
-    return http.status
-  }
-  catch(err) {
-    // probably CORS
-    console.log(`XHR error: ${err.message}`)
+const download = require('downloadjs')
 
-    return 299
-  }
-}
-
-const extract_filename = (URL) => {
-  if (!URL) return ''
-
-  const regex = /\/([^\/]+\.[^\/\.]{1,4})(?:[\?#]|$)/
-  const match = String(URL).match(regex)
-  if (match && (match.length >= 2)) return match[1]
-
-  return ''
-}
+const handle_error = (msg) => window.alert(msg)
 
 const downloadFile = function(URL) {
   try {
-    const status_code = url_status(URL)
+    const ajax = download(URL)
 
-    if ((status_code < 200) || (status_code >= 300))
-      throw new Error(status_code)
+    const onload = ajax.onload
 
-    const filename = extract_filename(URL)
+    ajax.onload = (e) => {
+      const code = ajax.status
+      if (code < 200 || code >= 300)
+        handle_error(`download error: ${ajax.status}`)
+      else
+        onload(e)
+    }
 
-    const a = window.document.createElement("a")
-    a.href = URL
-    a.setAttribute("target",   "_blank")
-    a.setAttribute("download", filename)
-
-    const e = window.document.createEvent("MouseEvents")
-    e.initEvent("click", false, true)
-
-    a.dispatchEvent(e)
+    ajax.onerror = (e) => {
+      if (ajax.status)
+        handle_error(`download error: ${ajax.status}`)
+      else
+        handle_error(`download error: XHR failed`)
+    }
   }
   catch(err) {
-    window.alert(`download error: ${err.message}`)
+    handle_error(`download error: ${err.message}`)
   }
 }
 
